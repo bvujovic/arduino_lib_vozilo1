@@ -1,0 +1,36 @@
+## Vozilo #############################
+Vozilo		KEYWORD1
+VoziloKomande	KEYWORD1
+SwSerSpeed	KEYWORD2
+CmdOk		KEYWORD2
+CmdError	KEYWORD2
+## Impuls #############################
+Impuls		KEYWORD1
+GetTime		KEYWORD2
+GetId		KEYWORD2
+GetValue	KEYWORD2
+Serialize	KEYWORD2
+ImpulsSerLength	KEYWORD2
+ToString	KEYWORD2
+USF		KEYWORD2
+USR		KEYWORD2
+USB		KEYWORD2
+USL		KEYWORD2
+GYz		KEYWORD2
+OIR		KEYWORD2
+OIL		KEYWORD2
+UsC		KEYWORD2
+VeC		KEYWORD2
+ConvertId2Name	KEYWORD2
+ConvertId2Class	KEYWORD2
+## ImpulsList #########################
+ImpulsList	KEYWORD1
+Add		KEYWORD2
+RemoveAll	KEYWORD2
+GetImpuls	KEYWORD2
+GetImpulsPtr	KEYWORD2
+GetImpulsRaw	KEYWORD2
+GetLastImpuls	KEYWORD2
+GetCount	KEYWORD2
+GetCapacity	KEYWORD2
+IsFull		KEYWORD2
