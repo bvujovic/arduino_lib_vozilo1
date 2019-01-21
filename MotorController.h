@@ -17,6 +17,9 @@ private:
 	short stateML = 0;
 	short stateMR = 0;
 
+	// da li se motori automatski balansiraju (u kodu Execute metode)
+	bool isAutoBalanced = true;
+
 	// stavlja u dozvoljene okvire stanja motora, <255 i sl provere i ispravke
 	void RegulateStates();
 
@@ -26,6 +29,9 @@ public:
 	static short Rnd(float d) { return d + 0.5F; }
 
 	MotorController();
+
+	bool IsAutoBalanced() { return isAutoBalanced; }
+	void SetAutoBalanced(bool ab) { isAutoBalanced = ab; }
 
 	// Metoda izvrsava komandu i vraca info o tome da li je potrebna priprema (kratak i jak impuls na motorima).
 	bool Execute(VoziloKomande cmd, short speed);

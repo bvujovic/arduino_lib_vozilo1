@@ -15,7 +15,7 @@ enum VoziloKomande
 	MotorTest = -4,
 
 	// smer vozila
-	Forward = 1, RightTurn = 2, Backward = 3, LeftTurn = 4, DirCorrect = 5,
+	Forward = 1, RightTurn = 2, Backward = 3, LeftTurn = 4, DirCorrect = 5 //B, SteerWheel = 6
 
 };
 

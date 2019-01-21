@@ -17,7 +17,8 @@ bool MotorController::Execute(VoziloKomande cmd, short speed)
 								 //B const short maxSpeedDirCorrect = 15;	// maksimum korekcije pravca
 
 								 // 1 - racunanje idealnog stanja za datu komandu
-	if (cmd == Stop || (cmd != DirCorrect && -MotorStateMinAbs <= speed && speed <= MotorStateMinAbs))
+	if (cmd == Stop ||
+		((cmd != DirCorrect/* && cmd != SteerWheel*/) && -MotorStateMinAbs <= speed && speed <= MotorStateMinAbs))
 	{
 		stateML = stateMR = 0;
 		return false;
@@ -26,7 +27,7 @@ bool MotorController::Execute(VoziloKomande cmd, short speed)
 	short oldStateML = stateML;
 	short oldStateMR = stateMR;
 
-	if (cmd == DirCorrect)
+	if (cmd == DirCorrect/* || cmd == SteerWheel*/)
 	{
 		if (speed > MotorMaxDirCorrect)
 			speed = MotorMaxDirCorrect;
@@ -42,7 +43,7 @@ bool MotorController::Execute(VoziloKomande cmd, short speed)
 			speed = stateMin; // (+40, +60) -> +60
 	}
 
-	if (cmd != DirCorrect)
+	if (cmd != DirCorrect/* && cmd != SteerWheel*/)
 		stateML = stateMR = speed;
 	if (cmd == Forward)
 	{
@@ -66,7 +67,7 @@ bool MotorController::Execute(VoziloKomande cmd, short speed)
 		stateMR = -abs(stateMR);
 	}
 
-	if (cmd == DirCorrect)
+	if (cmd == DirCorrect/* || cmd == SteerWheel*/)
 	{
 		stateML -= speed;
 		stateMR += speed;
@@ -87,14 +88,13 @@ bool MotorController::Execute(VoziloKomande cmd, short speed)
 		unsigned char speed;
 		unsigned char correction;
 	};
-	const SpeedCorrect scs[] = { { stateMin, 15 },{ 80, 15 },{ 160, 21 },{ stateMax, 18 } };
+	const SpeedCorrect scs[] = { { stateMin, 15 }, { 80, 15 }, { 160, 21 }, { stateMax, 18 } };
 	const short scsSize = sizeof(scs) / sizeof(SpeedCorrect);
 	//B std::cout << sizeof(scs) << std::endl;
 
 	// 3 - balansiranje
-	if (cmd == Forward || cmd == Backward || cmd == LeftTurn || cmd == RightTurn)
+	if (IsAutoBalanced() && (cmd == Forward || cmd == Backward || cmd == LeftTurn || cmd == RightTurn))
 	{
-
 		for (short i = 0; i < scsSize; i++)
 		{
 			//B std::cout << speed << " - " << (short)scs[i].speed << std::endl;
